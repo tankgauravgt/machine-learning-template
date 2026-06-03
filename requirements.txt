@@ -1,0 +1,8 @@
+--extra-index-url https://pytorch.org
+
+tensorboard
+torch
+torchvision
+lightning
+datasets
+transformers
