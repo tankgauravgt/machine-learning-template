@@ -1,6 +1,13 @@
 #!/bin/bash
 
+# create environment:
 UV_VENV_CLEAR=1 uv venv
+
+# activate environment:
 source .venv/bin/activate
+
+# install dependencies:
 uv pip install -r requirements.txt
-python main.py
+
+# start app:
+python train.py
