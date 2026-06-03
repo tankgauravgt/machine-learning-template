@@ -1,5 +1,6 @@
 --extra-index-url https://pytorch.org
 
+jarvislabs
 tensorboard
 torch
 torchvision
