@@ -3,7 +3,5 @@
 jarvislabs
 tensorboard
 torch
+torchaudio
 torchvision
-lightning
-datasets
-transformers
