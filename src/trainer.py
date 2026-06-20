@@ -28,7 +28,7 @@ class MLMTrainer:
             print(f"--- EXECUTING IN PRODUCTION MODE ({self.config.production_steps:,} Steps) ---")
             # Supply an explicit integer to satisfy the learning rate scheduler on streaming datasets
             calculated_max_steps = self.config.production_steps
-            calculated_save_steps = 5000
+            calculated_save_steps = 100
 
         if self.config.use_torch_compile:
             # Allow .item() calls to be captured rather than breaking the graph
