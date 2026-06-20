@@ -65,9 +65,7 @@ class MLMTrainer:
             torch_compile_backend="inductor",
             torch_compile_mode="max-autotune",
             # Fused AdamW kernel — faster than stock Adam on CUDA
-            optim="adamw_torch_fused",
-            save_safetensors=True,
-
+            optim="adamw_torch_fused"
         )
 
         trainer = Trainer(

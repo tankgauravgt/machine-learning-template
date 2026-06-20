@@ -1,18 +1,41 @@
+Resolved 48 packages in 406ms
+   Building transformer-engine-torch==2.16.0
+Downloading ml-dtypes (4.8MiB)
+Downloading transformer-engine-cu13 (180.9MiB)
+Downloading onnx (18.2MiB)
+ Downloaded ml-dtypes
+ Downloaded transformer-engine-cu13
+ Downloaded onnx
+      Built transformer-engine-torch==2.16.0
+Prepared 11 packages in 1m 29s
+Installed 11 packages in 290ms
+ + einops==0.8.2
+ + importlib-metadata==9.0.0
+ + ml-dtypes==0.5.4
+ + nvdlfw-inspect==0.2.2
+ + onnx==1.22.0
+ + onnx-ir==0.2.1
+ + onnxscript==0.7.0
+ + transformer-engine==2.16.0
+ + transformer-engine-cu13==2.16.0
+ + transformer-engine-torch==2.16.0
+ + zipp==4.1.0
+Initialising Data Pipeline...
+Building tokeniser...
+
+
+
 Preparing tokenised dataset and collator...
 Constructing Hugging Face model architecture...
 Model parameters : 109,116,725
 Commencing training execution...
 --- EXECUTING IN PRODUCTION MODE (400,000 Steps) ---
-{'loss': '41.74', 'grad_norm': '17.88', 'learning_rate': '9e-08', 'epoch': '2.5e-05'}
-{'loss': '41.74', 'grad_norm': '18.12', 'learning_rate': '1.9e-07', 'epoch': '5e-05'}
-{'loss': '41.75', 'grad_norm': '18.12', 'learning_rate': '2.9e-07', 'epoch': '7.5e-05'}
-{'loss': '41.74', 'grad_norm': '18.12', 'learning_rate': '3.9e-07', 'epoch': '0.0001'}
-{'loss': '41.74', 'grad_norm': '17.75', 'learning_rate': '4.9e-07', 'epoch': '0.000125'}
-{'loss': '41.73', 'grad_norm': '17.75', 'learning_rate': '5.9e-07', 'epoch': '0.00015'}
-{'loss': '41.73', 'grad_norm': '18.25', 'learning_rate': '6.9e-07', 'epoch': '0.000175'}
-{'loss': '41.72', 'grad_norm': '17.75', 'learning_rate': '7.9e-07', 'epoch': '0.0002'}
-{'loss': '41.71', 'grad_norm': '18', 'learning_rate': '8.9e-07', 'epoch': '0.000225'}
-{'loss': '41.7', 'grad_norm': '18', 'learning_rate': '9.9e-07', 'epoch': '0.00025'}
-{'loss': '41.68', 'grad_norm': '18', 'learning_rate': '1.09e-06', 'epoch': '0.000275'}
-{'loss': '41.66', 'grad_norm': '18', 'learning_rate': '1.19e-06', 'epoch': '0.0003'}
-{'loss': '41.64', 'grad_norm': '18', 'learning_rate': '1.29e-06', 'epoch': '0.000325'}
+Traceback (most recent call last):
+  File "/home/ML/train.py", line 54, in <module>
+    main()
+  File "/home/ML/train.py", line 49, in main
+    trainer.execute()
+  File "/home/ML/src/trainer.py", line 39, in execute
+    training_args = TrainingArguments(
+                    ^^^^^^^^^^^^^^^^^^
+TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'fp8'
