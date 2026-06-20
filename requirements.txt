@@ -1,11 +1,14 @@
---extra-index-url https://pytorch.org
+--extra-index-url https://download.pytorch.org/whl/cu128
 
-jarvislabs
 tensorboard
-torch>=2.7
+ninja
+jarvislabs
+
+torch
+torchvision
+torchaudio
+
 transformers>=4.57
 accelerate>=1.8
-datasets>=4.0
+datasets
 tokenizers
-flash-attn
-ninja
