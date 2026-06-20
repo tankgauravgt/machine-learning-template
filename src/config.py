@@ -34,7 +34,8 @@ class MLMConfig:
     lr_scheduler_type: str = "cosine"
 
     # DataLoader
-    num_workers: int = 4
+    num_workers: int = 16
+    shuffle_buffer_size: int = 10_000
 
     # Hardware Optimisation Flags (Hopper / H200)
     use_bf16: bool = True

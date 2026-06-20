@@ -71,8 +71,10 @@ class DataPipeline:
                 padding="max_length",
             )
 
-        tokenized_dataset = dataset.map(tokenize_fn, batched=True, batch_size=1000)
-        
+        tokenized_dataset = dataset.shuffle(buffer_size=self.config.shuffle_buffer_size).map(
+            tokenize_fn, batched=True, batch_size=1000
+        )
+
         # Isolate numerical tensors and discard string metadata
         tokenized_dataset = tokenized_dataset.select_columns(["input_ids", "attention_mask"])
         tokenized_dataset = tokenized_dataset.with_format("torch")

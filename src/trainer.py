@@ -28,7 +28,7 @@ class MLMTrainer:
             print(f"--- EXECUTING IN PRODUCTION MODE ({self.config.production_steps:,} Steps) ---")
             # Supply an explicit integer to satisfy the learning rate scheduler on streaming datasets
             calculated_max_steps = self.config.production_steps
-            calculated_save_steps = 100
+            calculated_save_steps = 5000
 
         if self.config.use_torch_compile:
             # Allow .item() calls to be captured rather than breaking the graph
@@ -52,14 +52,19 @@ class MLMTrainer:
             # DataLoader
             dataloader_pin_memory=torch.cuda.is_available(),
             dataloader_num_workers=self.config.num_workers,
-            dataloader_prefetch_factor=2,
+            dataloader_prefetch_factor=8,
+            dataloader_persistent_workers=self.config.num_workers > 0,
+            dataloader_drop_last=True,
             # Hardware Acceleration (H200 / Hopper)
             bf16=self.config.use_bf16,
             fp16=False,
             tf32=self.config.use_tf32,
             torch_compile=self.config.use_torch_compile,
+            torch_compile_backend="inductor",
+            torch_compile_mode="max-autotune",
             # Fused AdamW kernel — faster than stock Adam on CUDA
             optim="adamw_torch_fused",
+            save_safetensors=True,
 
         )
 
