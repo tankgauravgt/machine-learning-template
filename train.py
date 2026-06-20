@@ -6,6 +6,12 @@ os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "bf16")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")  # reduce fragmentation
 os.environ.setdefault("NCCL_P2P_DISABLE", "0")
 
+import pyarrow as pa
+# PyExtensionType was renamed to ExtensionType in pyarrow 15; restore the old name
+# so that older datasets versions that still reference it can import cleanly.
+if not hasattr(pa, "PyExtensionType"):
+    pa.PyExtensionType = pa.ExtensionType
+
 import torch
 
 # Enable TF32 globally before model/data init
