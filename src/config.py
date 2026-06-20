@@ -35,7 +35,7 @@ class MLMConfig:
 
     # DataLoader
     num_workers: int = 16
-    shuffle_buffer_size: int = 10_000
+    tokenize_num_proc: int = 16       # parallel processes for dataset.map() during tokenisation
 
     # Hardware Optimisation Flags (Hopper / H200)
     use_bf16: bool = True           # master weights / model init dtype

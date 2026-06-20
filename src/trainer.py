@@ -36,6 +36,8 @@ class MLMTrainer:
             # Treat layer_idx as dynamic so compile doesn't respecialize per layer
             torch._dynamo.config.allow_unspec_int_on_nn_module = True
 
+        effective_workers = self.config.num_workers
+
         training_args = TrainingArguments(
             output_dir=self.config.checkpoint_dir,
             max_steps=calculated_max_steps,
@@ -51,7 +53,7 @@ class MLMTrainer:
             report_to="none",
             # DataLoader
             dataloader_pin_memory=torch.cuda.is_available(),
-            dataloader_num_workers=self.config.num_workers,
+            dataloader_num_workers=effective_workers,
             dataloader_prefetch_factor=8,
             dataloader_persistent_workers=self.config.num_workers > 0,
             dataloader_drop_last=True,
@@ -63,7 +65,9 @@ class MLMTrainer:
             tf32=self.config.use_tf32,
             torch_compile=self.config.use_torch_compile,
             torch_compile_backend="inductor",
-            torch_compile_mode="max-autotune",
+            # no-cudagraphs: keeps kernel autotuning but avoids CUDA graph tensor aliasing
+            # errors that occur when the MLM head output is overwritten between forward passes
+            torch_compile_mode="max-autotune-no-cudagraphs",
             # Fused AdamW kernel — faster than stock Adam on CUDA
             optim="adamw_torch_fused"
         )

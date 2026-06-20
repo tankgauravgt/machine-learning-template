@@ -28,15 +28,15 @@ def main():
     
     print("Initialising Data Pipeline...")
     pipeline = DataPipeline(config)
-    dataset_stream = pipeline.load_stream()
-    
+
+    print("Downloading dataset...")
+    dataset = pipeline.load_dataset()
+
     print("Building tokeniser...")
-    tokenizer = pipeline.build_tokenizer(dataset_stream)
-    
+    tokenizer = pipeline.build_tokenizer(dataset)
+
     print("Preparing tokenised dataset and collator...")
-    # Re-initialise the stream for the mapping phase to ensure the iterator resets
-    dataset_stream = pipeline.load_stream() 
-    tokenized_dataset, collator = pipeline.prepare_dataset(dataset_stream)
+    tokenized_dataset, collator = pipeline.prepare_dataset(dataset)
     
     print("Constructing Hugging Face model architecture...")
     model = ModelFactory.create_masked_lm(config, tokenizer)
