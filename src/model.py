@@ -22,8 +22,7 @@ class ModelFactory:
             attention_probs_dropout_prob=config.dropout,
             pad_token_id=tokenizer.pad_token_id,
             is_decoder=False,
-            # Enable SDPA-backed Flash Attention 2 when requested
-            attn_implementation="flash_attention_2" if config.use_flash_attention else "sdpa",
+            attn_implementation="flash_attention_3" if config.use_flash_attention else "sdpa",
         )
 
         model = BertForMaskedLM(bert_config)
