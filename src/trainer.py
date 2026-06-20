@@ -47,9 +47,7 @@ class MLMTrainer:
             dataloader_num_workers=self.config.num_workers,
             dataloader_prefetch_factor=2,
             # Hardware Acceleration (H200 / Hopper)
-            # FP8 compute is driven by ACCELERATE_MIXED_PRECISION=fp8 env var (set in script.cloud.sh);
-            # bf16 is kept True here as the fallback / master-weight dtype for the HF Trainer path.
-            bf16=not self.config.use_fp8,
+            bf16=self.config.use_bf16,
             fp16=False,
             tf32=self.config.use_tf32,
             torch_compile=self.config.use_torch_compile,

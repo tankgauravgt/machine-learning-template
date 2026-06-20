@@ -28,8 +28,7 @@ class ModelFactory:
 
         model = BertForMaskedLM(bert_config)
 
-        # Keep master weights in bf16; FP8 compute is handled at the Accelerate/TE layer
-        if config.use_fp8:
+        if config.use_bf16:
             model = model.to(torch.bfloat16)
 
         return model

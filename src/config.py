@@ -37,8 +37,7 @@ class MLMConfig:
     num_workers: int = 4
 
     # Hardware Optimisation Flags (Hopper / H200)
-    # FP8 for compute (via accelerate + transformer_engine); BF16 for master weights
-    use_fp8: bool = True
+    use_bf16: bool = True
     use_tf32: bool = True
     use_torch_compile: bool = True
     use_flash_attention: bool = True
