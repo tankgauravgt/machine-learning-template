@@ -4,12 +4,24 @@ Constructing Hugging Face model architecture...
 Model parameters : 109,116,725
 Commencing training execution...
 --- EXECUTING IN PRODUCTION MODE (400,000 Steps) ---
-Traceback (most recent call last):
-  File "/home/ML/train.py", line 54, in <module>
-    main()
-  File "/home/ML/train.py", line 49, in main
-    trainer.execute()
-  File "/home/ML/src/trainer.py", line 32, in execute
-    training_args = TrainingArguments(
-                    ^^^^^^^^^^^^^^^^^^
-TypeError: TrainingArguments.__init__() got an unexpected keyword argument 'group_by_length'
+  0%|          | 0/400000 [00:00<?, ?it/s]W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] Graph break from `Tensor.item()`, consider setting:
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]     torch._dynamo.config.capture_scalar_outputs = True
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] or:
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] to include these operations in the captured graph.
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] 
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] Graph break: from user code at:
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]   File "/home/ML/.venv/lib/python3.12/site-packages/transformers/modeling_flash_attention_utils.py", line 780, in torch_dynamo_resume_in__flash_attention_forward_at_765
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]     **flash_kwargs(max_seqlen_q=max_length_q, max_seqlen_k=max_length_k),
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]   File "/home/ML/.venv/lib/python3.12/site-packages/transformers/modeling_flash_attention_utils.py", line 673, in _process_flash_attention_kwargs
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0]     max_seqlen_q = max_seqlen_q.item()
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] 
+W0620 11:05:09.587000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/variables/tensor.py:1612] [26/0] 
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8] torch._dynamo hit config.recompile_limit (8)
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8]    function: 'flash_attention_forward' (/home/ML/.venv/lib/python3.12/site-packages/transformers/integrations/flash_attention.py:26)
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8]    last reason: 20/7: module.layer_idx == 7                                    # layer_idx=module.layer_idx if hasattr(module, "layer_idx") else None,  # transformers/integrations/flash_attention.py:84 in flash_attention_forward (HINT: torch.compile considers integer attributes of the nn.Module to be static. If you are observing recompilation, you might want to make this integer dynamic using torch._dynamo.config.allow_unspec_int_on_nn_module = True, or convert this integer into a tensor.)
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8] User stack trace:
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8]   File "/home/ML/.venv/lib/python3.12/site-packages/transformers/integrations/flash_attention.py", line 84, in flash_attention_forward
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8]     layer_idx=module.layer_idx if hasattr(module, "layer_idx") else None,
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+W0620 11:05:13.495000 500 .venv/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py:1853] [20/8] To diagnose recompilation issues, see https://docs.pytorch.org/docs/main/user_guide/torch_compiler/compile/programming_model.recompilation.html
