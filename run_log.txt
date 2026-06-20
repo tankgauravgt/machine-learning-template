@@ -1,39 +1,983 @@
-=========================================
-          Instance Manager REPL          
-=========================================
-1. Create instance
-2. Log into SSH (share port 6006)
-3. Stream logs
-4. Destroy instance
-5. Exit
-=========================================
-Select an option (1-5): 3
-Streaming logs for Run ID: [r_10d1ac3c]...
-(Press Ctrl+C to stop streaming and return to the menu)
-Following logs for run r_10d1ac3c on instance 430661. Press Ctrl+C to stop streaming.
-Showing the latest 20 log lines first. Use --tail N to change this.
-Run ID: r_10d1ac3c
-  Logs    jl run logs r_10d1ac3c --follow
-  Status  jl run status r_10d1ac3c
-  Stop    jl run stop r_10d1ac3c
-  All runs jl run list
+      compilation terminated.
+      [16/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/apply_rope.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/apply_rope.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/apply_rope.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/apply_rope.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/apply_rope.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/apply_rope.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/apply_rope.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/apply_rope.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [17/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/activation.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/activation.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/activation.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/activation.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/activation.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/activation.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/activation.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/activation.cpp:6:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [18/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/router.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/router.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/router.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/router.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/router.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/router.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/router.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/router.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [19/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/scale.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/scale.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/scale.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/scale.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/scale.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/scale.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/scale.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/scale.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [20/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/dropout.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/dropout.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/dropout.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/dropout.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/dropout.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/dropout.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/dropout.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/pybind.h:18,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/dropout.cpp:10:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [21/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/pybind.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/pybind.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/pybind.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/pybind.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/pybind.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/pybind.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/pybind.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/pybind.h:18,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/pybind.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [22/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/comm_gemm_overlap.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/comm_gemm_overlap.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/comm_gemm_overlap.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/comm_gemm_overlap.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/comm_gemm_overlap.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/comm_gemm_overlap.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/comm_gemm_overlap.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/comm_gemm_overlap.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [23/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/adam.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/adam.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/adam.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/adam.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/adam.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/adam.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/adam.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/adam.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [24/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/permutation.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/permutation.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/permutation.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/permutation.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/permutation.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/permutation.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/permutation.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/permutation.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [25/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/allocate.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/allocate.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/allocate.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/allocate.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/allocate.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/allocate.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/allocate.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/allocate.cpp:10:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [26/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/l2norm.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/l2norm.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/l2norm.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/l2norm.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/l2norm.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/l2norm.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/multi_tensor/l2norm.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/../../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/multi_tensor/l2norm.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [27/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/cast.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/cast.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/cast.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/cast.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/cast.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/cast.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/cast.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/cast.cpp:18:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [28/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/gemm.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/gemm.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/gemm.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/gemm.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/gemm.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/gemm.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/gemm.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/../extensions.h:17,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/gemm.cpp:12:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [29/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/bias.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/bias.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/bias.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/bias.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/bias.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/bias.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/bias.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/common.h:40,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/bias.cpp:13:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/./util/logging.h:12:10:
+      fatal error: cudnn.h: No such file or directory
+         12 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      [30/32] c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/transpose.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/transpose.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/transpose.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      FAILED:
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/transpose.o
+      c++ -MMD -MF
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/transpose.o.d
+      -pthread -B /root/miniconda3/envs/py3.10/compiler_compat
+      -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC
+      -O2 -isystem /root/miniconda3/envs/py3.10/include -fPIC -O2 -isystem
+      /root/miniconda3/envs/py3.10/include -fPIC -I/usr/local/cuda/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/common_headers/common/include
+      -I/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/torch/csrc/api/include
+      -I/home/.cache/uv/builds-v0/.tmpai1xDl/include
+      -I/root/miniconda3/envs/py3.10/include/python3.10 -c -c
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/transpose.cpp
+      -o
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build/temp.linux-x86_64-cpython-310/csrc/extensions/transpose.o
+      -O3 -fvisibility=hidden -g0 -DTORCH_API_INCLUDE_EXTENSION_H
+      -DTORCH_EXTENSION_NAME=transformer_engine_torch -std=c++17
+      In file included from
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/Handle.h:5,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/common.h:14,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/pybind.h:18,
+                       from
+      /home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/csrc/extensions/transpose.cpp:7:
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/include/ATen/cudnn/cudnn-wrapper.h:4:10:
+      fatal error: cudnn.h: No such file or directory
+          4 | #include <cudnn.h>
+            |          ^~~~~~~~~
+      compilation terminated.
+      ninja: build stopped: subcommand failed.
+
+      [stderr]
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_vendor/wheel/bdist_wheel.py:4:
+      FutureWarning: The 'wheel' package is no longer the canonical location
+      of the 'bdist_wheel' command, and will be removed in a future release.
+      Please update to setuptools v70.1 or later which contains an integrated
+      version of this command.
+        warn(
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py:283:
+      UserWarning: Failed to initialize NumPy: No module named 'numpy'
+      (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+        cpu = _conversion_method_template(device=torch.device("cpu"))
+      /home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/dist.py:287:
+      UserWarning: Unknown distribution option: 'tests_require'
+        warnings.warn(msg)
+      Traceback (most recent call last):
+        File "<string>", line 133, in run
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 241, in urlretrieve
+          with contextlib.closing(urlopen(url, data)) as fp:
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 216, in urlopen
+          return opener.open(url, data, timeout)
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 525, in open
+          response = meth(req, response)
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 634, in http_response
+          response = self.parent.error(
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 563, in error
+          return self._call_chain(*args)
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 496, in _call_chain
+          result = func(*args)
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/urllib/request.py",
+      line 643, in http_error_default
+          raise HTTPError(req.full_url, code, msg, hdrs, fp)
+      urllib.error.HTTPError: HTTP Error 404: Not Found
+
+      During handling of the above exception, another exception occurred:
+
+      Traceback (most recent call last):
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      line 2693, in _run_ninja_build
+          subprocess.run(
+        File "/root/miniconda3/envs/py3.10/lib/python3.10/subprocess.py", line
+      526, in run
+          raise CalledProcessError(retcode, process.args,
+      subprocess.CalledProcessError: Command '['ninja', '-v']' returned
+      non-zero exit status 1.
+
+      The above exception was the direct cause of the following exception:
+
+      Traceback (most recent call last):
+        File "<string>", line 11, in <module>
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 438, in build_wheel
+          return _build(['bdist_wheel'])
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 429, in _build
+          return self._build_with_temp_dir(
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 410, in _build_with_temp_dir
+          self.run_setup()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/build_meta.py",
       line 520, in run_setup
           super().run_setup(setup_script=setup_script)
         File
-      "/home/.cache/uv/builds-v0/.tmpIfe5Ls/lib/python3.10/site-packages/setuptools/build_meta.py",
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/build_meta.py",
       line 317, in run_setup
           exec(code, locals())
-        File "<string>", line 22, in <module>
-      ModuleNotFoundError: No module named 'torch'
+        File "<string>", line 176, in <module>
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/__init__.py",
+      line 117, in setup
+          return distutils.core.setup(**attrs)  # type: ignore[return-value]
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/core.py",
+      line 186, in setup
+          return run_commands(dist)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/core.py",
+      line 202, in run_commands
+          dist.run_commands()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/dist.py",
+      line 1000, in run_commands
+          self.run_command(cmd)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/dist.py",
+      line 1107, in run_command
+          super().run_command(command)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/dist.py",
+      line 1019, in run_command
+          cmd_obj.run()
+        File "<string>", line 151, in run
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/command/bdist_wheel.py",
+      line 370, in run
+          self.run_command("build")
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/cmd.py",
+      line 341, in run_command
+          self.distribution.run_command(command)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/dist.py",
+      line 1107, in run_command
+          super().run_command(command)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/dist.py",
+      line 1019, in run_command
+          cmd_obj.run()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/command/build.py",
+      line 135, in run
+          self.run_command(cmd_name)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/cmd.py",
+      line 341, in run_command
+          self.distribution.run_command(command)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/dist.py",
+      line 1107, in run_command
+          super().run_command(command)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/dist.py",
+      line 1019, in run_command
+          cmd_obj.run()
+        File
+      "/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build_tools/build_ext.py",
+      line 137, in run
+          super().run()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/command/build_ext.py",
+      line 97, in run
+          _build_ext.run(self)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py",
+      line 367, in run
+          self.build_extensions()
+        File
+      "/home/.cache/uv/sdists-v9/pypi/transformer-engine-torch/2.16.0/5WtLzZey3Lsg5Y5y/src/build_tools/build_ext.py",
+      line 214, in build_extensions
+          super().build_extensions()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      line 1143, in build_extensions
+          build_ext.build_extensions(self)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py",
+      line 483, in build_extensions
+          self._build_extensions_serial()
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py",
+      line 509, in _build_extensions_serial
+          self.build_extension(ext)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/command/build_ext.py",
+      line 262, in build_extension
+          _build_ext.build_extension(self, ext)
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/setuptools/_distutils/command/build_ext.py",
+      line 564, in build_extension
+          objects = self.compiler.compile(
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      line 900, in unix_wrap_ninja_compile
+          _write_ninja_file_and_compile_objects(
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      line 2297, in _write_ninja_file_and_compile_objects
+          _run_ninja_build(
+        File
+      "/home/.cache/uv/builds-v0/.tmpai1xDl/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      line 2710, in _run_ninja_build
+          raise RuntimeError(message) from e
+      RuntimeError: Error compiling objects for extension
 
-      hint: This error likely indicates that `flash-attn@2.8.3.post1`
-      depends on `torch`, but doesn't declare it as a build dependency.
-      If `flash-attn` is a first-party package, consider adding `torch`
-      to its `build-system.requires`. Otherwise, either add it to your
-      `pyproject.toml` under:
-
-      [tool.uv.extra-build-dependencies]
-      flash-attn = ["torch"]
-
-      or `uv pip install torch` into the environment and re-run with
-      `--no-build-isolation`.
+      hint: This usually indicates a problem with the package or the build
+      environment.
+  help: `transformer-engine-torch` (v2.16.0) was included because
+        `transformer-engine[pytorch]` (v2.16.0) depends on
+        `transformer-engine-torch`
