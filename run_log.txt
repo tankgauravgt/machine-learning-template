@@ -1,14 +1,6 @@
 Traceback (most recent call last):
-  File "/home/ML/train.py", line 16, in <module>
+  File "/home/ML/train.py", line 22, in <module>
     from src.data_pipeline import DataPipeline
   File "/home/ML/src/data_pipeline.py", line 4, in <module>
     from datasets import load_dataset, IterableDataset
-  File "/home/ML/.venv/lib/python3.10/site-packages/datasets/__init__.py", line 27, in <module>
-    from .arrow_dataset import Dataset, concatenate_datasets
-  File "/home/ML/.venv/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 41, in <module>
-    from .arrow_writer import ArrowWriter, TypedSequence
-  File "/home/ML/.venv/lib/python3.10/site-packages/datasets/arrow_writer.py", line 26, in <module>
-    from .features import Features, _ArrayXDExtensionType
-  File "/home/ML/.venv/lib/python3.10/site-packages/datasets/features.py", line 210, in <module>
-    class _ArrayXDExtensionType(pa.PyExtensionType):
-AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'. Did you mean: 'ExtensionType'?
+ImportError: cannot import name 'IterableDataset' from 'datasets' (/home/ML/.venv/lib/python3.10/site-packages/datasets/__init__.py)
