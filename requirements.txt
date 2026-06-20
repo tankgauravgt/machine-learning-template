@@ -9,3 +9,4 @@ datasets>=4.0
 tokenizers
 flash-attn
 ninja
+transformer_engine[pytorch]

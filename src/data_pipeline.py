@@ -63,9 +63,14 @@ class DataPipeline:
             raise ValueError("Tokeniser must be built before preparing the dataset.")
 
         def tokenize_fn(batch):
-            return self.tokenizer(batch["text"], truncation=True, max_length=self.config.max_length)
+            return self.tokenizer(
+                batch["text"],
+                truncation=True,
+                max_length=self.config.max_length,
+                padding="max_length",
+            )
 
-        tokenized_dataset = dataset.map(tokenize_fn, batched=True)
+        tokenized_dataset = dataset.map(tokenize_fn, batched=True, batch_size=1000)
         
         # Isolate numerical tensors and discard string metadata
         tokenized_dataset = tokenized_dataset.select_columns(["input_ids", "attention_mask"])

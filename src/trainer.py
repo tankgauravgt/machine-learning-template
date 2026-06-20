@@ -5,7 +5,7 @@ from src.config import MLMConfig
 
 class MLMTrainer:
     """Manages the training lifecycle using the Hugging Face Trainer API."""
-    
+
     def __init__(self, config: MLMConfig, model, dataset, collator):
         self.config = config
         self.model = model
@@ -14,10 +14,13 @@ class MLMTrainer:
 
     def execute(self):
         """Compiles training arguments and initiates the training process."""
-        
+
         if self.config.is_testing:
             print(f"--- EXECUTING IN TESTING MODE ({self.config.test_samples} Samples) ---")
-            steps_per_epoch = math.ceil(self.config.test_samples / self.config.batch_size)
+            steps_per_epoch = math.ceil(
+                self.config.test_samples
+                / (self.config.batch_size * self.config.gradient_accumulation_steps)
+            )
             calculated_max_steps = steps_per_epoch * self.config.epochs
             calculated_save_steps = steps_per_epoch
         else:
@@ -30,16 +33,30 @@ class MLMTrainer:
             output_dir=self.config.checkpoint_dir,
             max_steps=calculated_max_steps,
             per_device_train_batch_size=self.config.batch_size,
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
             learning_rate=self.config.learning_rate,
+            warmup_steps=self.config.warmup_steps,
+            weight_decay=self.config.weight_decay,
+            lr_scheduler_type=self.config.lr_scheduler_type,
             logging_steps=10,
             save_steps=calculated_save_steps,
-            remove_unused_columns=False, 
+            remove_unused_columns=False,
             report_to="none",
+            # DataLoader
             dataloader_pin_memory=torch.cuda.is_available(),
-            # Hardware Acceleration Parameters
-            bf16=self.config.use_bf16,
+            dataloader_num_workers=self.config.num_workers,
+            dataloader_prefetch_factor=2,
+            # Hardware Acceleration (H200 / Hopper)
+            # FP8 compute is driven by ACCELERATE_MIXED_PRECISION=fp8 env var (set in script.cloud.sh);
+            # bf16 is kept True here as the fallback / master-weight dtype for the HF Trainer path.
+            bf16=not self.config.use_fp8,
+            fp16=False,
             tf32=self.config.use_tf32,
-            torch_compile=self.config.use_torch_compile
+            torch_compile=self.config.use_torch_compile,
+            # Fused AdamW kernel — faster than stock Adam on CUDA
+            optim="adamw_torch_fused",
+            # Pack multiple short sequences into one sample to eliminate padding waste
+            group_by_length=True,
         )
 
         trainer = Trainer(
@@ -50,6 +67,6 @@ class MLMTrainer:
         )
 
         trainer.train()
-        
+
         # Persist the final model state
         trainer.save_model(self.config.checkpoint_dir)

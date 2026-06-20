@@ -1,3 +1,17 @@
+import os
+
+# Must be set before any CUDA / torch import to take effect
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")          # avoid tokeniser fork warnings
+os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "fp8")        # FP8 compute on Hopper
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")  # reduce fragmentation
+os.environ.setdefault("NCCL_P2P_DISABLE", "0")
+
+import torch
+
+# Enable TF32 globally before model/data init
+torch.backends.cuda.matmul.allow_tf32 = True
+torch.backends.cudnn.allow_tf32 = True
+
 from src.config import MLMConfig
 from src.data_pipeline import DataPipeline
 from src.model import ModelFactory
