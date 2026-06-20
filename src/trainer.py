@@ -53,8 +53,7 @@ class MLMTrainer:
             torch_compile=self.config.use_torch_compile,
             # Fused AdamW kernel — faster than stock Adam on CUDA
             optim="adamw_torch_fused",
-            # Pack multiple short sequences into one sample to eliminate padding waste
-            group_by_length=True,
+
         )
 
         trainer = Trainer(

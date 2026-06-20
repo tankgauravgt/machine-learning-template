@@ -25,9 +25,9 @@ class ModelFactory:
             attn_implementation="flash_attention_3" if config.use_flash_attention else "sdpa",
         )
 
+        dtype = torch.bfloat16 if config.use_bf16 else torch.float32
+        torch.set_default_dtype(dtype)
         model = BertForMaskedLM(bert_config)
-
-        if config.use_bf16:
-            model = model.to(torch.bfloat16)
+        torch.set_default_dtype(torch.float32)
 
         return model
