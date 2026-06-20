@@ -1,11 +1,8 @@
 import os
 import itertools
 from typing import Tuple
-from datasets import load_dataset
-try:
-    from datasets import IterableDataset
-except ImportError:
-    from datasets.iterable_dataset import IterableDataset
+from datasets import load_dataset, IterableDataset
+
 from tokenizers import Tokenizer
 from tokenizers.models import BPE
 from tokenizers.trainers import BpeTrainer

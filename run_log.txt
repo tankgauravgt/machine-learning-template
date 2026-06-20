@@ -1,6 +1,34 @@
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting flash-attn-3
+  Downloading flash_attn_3-3.0.0-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (22 kB)
+Downloading flash_attn_3-3.0.0-cp39-abi3-manylinux_2_28_x86_64.whl (442.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 442.2/442.2 MB 90.2 MB/s  0:00:05
+Installing collected packages: flash-attn-3
+Successfully installed flash-attn-3-3.0.0
+Initialising Data Pipeline...
+Building tokeniser...
+
+
+
+Preparing tokenised dataset and collator...
+Constructing Hugging Face model architecture...
 Traceback (most recent call last):
-  File "/home/ML/train.py", line 22, in <module>
-    from src.data_pipeline import DataPipeline
-  File "/home/ML/src/data_pipeline.py", line 4, in <module>
-    from datasets import load_dataset, IterableDataset
-ImportError: cannot import name 'IterableDataset' from 'datasets' (/home/ML/.venv/lib/python3.10/site-packages/datasets/__init__.py)
+  File "/home/ML/train.py", line 54, in <module>
+    main()
+  File "/home/ML/train.py", line 42, in main
+    model = ModelFactory.create_masked_lm(config, tokenizer)
+  File "/home/ML/src/model.py", line 29, in create_masked_lm
+    model = BertForMaskedLM(bert_config)
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/models/bert/modeling_bert.py", line 920, in __init__
+    super().__init__(config)
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1355, in __init__
+    self.config._attn_implementation_internal = self._check_and_adjust_attn_implementation(
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1994, in _check_and_adjust_attn_implementation
+    applicable_attn_implementation = self.get_correct_attn_implementation(
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 2041, in get_correct_attn_implementation
+    self._flash_attn_can_dispatch(flash_attn_version=fa_version, is_init_check=is_init_check)
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1770, in _flash_attn_can_dispatch
+    self._flash_attn_import_error(**FLASH_ATTENTION_COMPATIBILITY_MATRIX[flash_attn_version])
+  File "/home/ML/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py", line 1725, in _flash_attn_import_error
+    raise ImportError(
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package for FlashAttention2 doesn't seem to be installed.
