@@ -2,6 +2,10 @@
 
 jarvislabs
 tensorboard
-torch
-torchaudio
-torchvision
+torch>=2.7
+transformers>=4.57
+accelerate>=1.8
+datasets>=4.0
+tokenizers
+flash-attn
+ninja

@@ -25,8 +25,8 @@ while true; do
     case $OPTION in
         1)
             echo "Creating instance..."
-            OUTPUT=$(jl run . --gpu A30 --script ./script.local.sh --spot --json --keep --no-follow --yes)
-            
+            OUTPUT=$(jl run . --gpu H200 --script ./script.local.sh --spot --json --keep --no-follow --yes --setup "export HF_TOKEN=$HF_TOKEN && export ACCELERATE_MIXED_PRECISION=fp8")
+                        
             # Extract identifiers
             MACHINE_ID=$(echo "$OUTPUT" | jq -r '.machine_id')
             RUN_ID=$(echo "$OUTPUT" | jq -r '.run_id')

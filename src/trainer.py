@@ -1,0 +1,55 @@
+import math
+import torch
+from transformers import Trainer, TrainingArguments
+from src.config import MLMConfig
+
+class MLMTrainer:
+    """Manages the training lifecycle using the Hugging Face Trainer API."""
+    
+    def __init__(self, config: MLMConfig, model, dataset, collator):
+        self.config = config
+        self.model = model
+        self.dataset = dataset
+        self.collator = collator
+
+    def execute(self):
+        """Compiles training arguments and initiates the training process."""
+        
+        if self.config.is_testing:
+            print(f"--- EXECUTING IN TESTING MODE ({self.config.test_samples} Samples) ---")
+            steps_per_epoch = math.ceil(self.config.test_samples / self.config.batch_size)
+            calculated_max_steps = steps_per_epoch * self.config.epochs
+            calculated_save_steps = steps_per_epoch
+        else:
+            print(f"--- EXECUTING IN PRODUCTION MODE ({self.config.production_steps:,} Steps) ---")
+            # Supply an explicit integer to satisfy the learning rate scheduler on streaming datasets
+            calculated_max_steps = self.config.production_steps
+            calculated_save_steps = 5000
+
+        training_args = TrainingArguments(
+            output_dir=self.config.checkpoint_dir,
+            max_steps=calculated_max_steps,
+            per_device_train_batch_size=self.config.batch_size,
+            learning_rate=self.config.learning_rate,
+            logging_steps=10,
+            save_steps=calculated_save_steps,
+            remove_unused_columns=False, 
+            report_to="none",
+            dataloader_pin_memory=torch.cuda.is_available(),
+            # Hardware Acceleration Parameters
+            bf16=self.config.use_bf16,
+            tf32=self.config.use_tf32,
+            torch_compile=self.config.use_torch_compile
+        )
+
+        trainer = Trainer(
+            model=self.model,
+            args=training_args,
+            train_dataset=self.dataset,
+            data_collator=self.collator,
+        )
+
+        trainer.train()
+        
+        # Persist the final model state
+        trainer.save_model(self.config.checkpoint_dir)
