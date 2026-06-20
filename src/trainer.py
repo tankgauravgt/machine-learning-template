@@ -1,5 +1,6 @@
 import math
 import torch
+import torch._dynamo
 from transformers import Trainer, TrainingArguments
 from src.config import MLMConfig
 
@@ -28,6 +29,12 @@ class MLMTrainer:
             # Supply an explicit integer to satisfy the learning rate scheduler on streaming datasets
             calculated_max_steps = self.config.production_steps
             calculated_save_steps = 5000
+
+        if self.config.use_torch_compile:
+            # Allow .item() calls to be captured rather than breaking the graph
+            torch._dynamo.config.capture_scalar_outputs = True
+            # Treat layer_idx as dynamic so compile doesn't respecialize per layer
+            torch._dynamo.config.allow_unspec_int_on_nn_module = True
 
         training_args = TrainingArguments(
             output_dir=self.config.checkpoint_dir,

@@ -10,24 +10,23 @@ class ModelFactory:
         """Initialises a BERT base model from scratch with H200-optimal settings."""
         vocab_size = tokenizer.vocab_size + len(tokenizer.added_tokens_encoder)
 
+        dtype = torch.bfloat16 if config.use_bf16 else torch.float32
+
         bert_config = BertConfig(
             vocab_size=vocab_size,
             hidden_size=config.d_model,
             num_hidden_layers=config.num_layers,
             num_attention_heads=config.nhead,
-            # BERT base intermediate dim is 4× hidden size
             intermediate_size=config.d_model * 4,
             max_position_embeddings=config.max_length,
             hidden_dropout_prob=config.dropout,
             attention_probs_dropout_prob=config.dropout,
             pad_token_id=tokenizer.pad_token_id,
             is_decoder=False,
+            torch_dtype=dtype,
             attn_implementation="flash_attention_3" if config.use_flash_attention else "sdpa",
         )
 
-        dtype = torch.bfloat16 if config.use_bf16 else torch.float32
-        torch.set_default_dtype(dtype)
-        model = BertForMaskedLM(bert_config)
-        torch.set_default_dtype(torch.float32)
+        model = BertForMaskedLM(bert_config).to(dtype)
 
         return model
