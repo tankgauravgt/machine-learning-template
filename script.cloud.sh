@@ -25,8 +25,17 @@ while true; do
 
     case $OPTION in
         1)
+            FS_FLAG=""
+            read -p "Attach a filesystem? (y/n): " ATTACH_FS
+            if [[ "$ATTACH_FS" =~ ^[Yy]$ ]]; then
+                echo "Fetching available filesystems..."
+                jl filesystem list
+                read -p "Enter filesystem ID to attach: " FS_ID
+                FS_FLAG="--fs-id $FS_ID"
+            fi
+
             echo "Creating instance..."
-            OUTPUT=$(jl run . --gpu "H200" --region "IN2" --script ./script.local.sh --spot --json --keep --no-follow --yes --setup "export HF_TOKEN=$HF_TOKEN && export ACCELERATE_MIXED_PRECISION=fp16")
+            OUTPUT=$(jl run . --gpu "H200" --region "IN2" --script ./script.local.sh --spot --json --keep --no-follow --yes --setup "export HF_TOKEN=$HF_TOKEN && export ACCELERATE_MIXED_PRECISION=fp16" $FS_FLAG)
 
             # Extract identifiers
             MACHINE_ID=$(echo "$OUTPUT" | jq -r '.machine_id')
@@ -75,61 +84,48 @@ while true; do
             while true; do
                 clear
                 echo "========================================="
-                echo "           Storage Manager               "
+                echo "         Filesystem Manager              "
                 echo "========================================="
-                echo "1. List storage"
-                echo "2. Create storage"
-                echo "3. Attach storage"
-                echo "4. Detach storage"
-                echo "5. Destroy storage"
-                echo "6. Back"
+                echo "1. List filesystems"
+                echo "2. Create filesystem"
+                echo "3. Edit filesystem (resize)"
+                echo "4. Remove filesystem"
+                echo "5. Back"
                 echo "========================================="
-                read -p "Select an option (1-6): " STORAGE_OPTION
+                read -p "Select an option (1-5): " FS_OPTION
 
-                case $STORAGE_OPTION in
+                case $FS_OPTION in
                     1)
-                        echo "Listing storage volumes..."
-                        jl storage list
+                        echo "Listing filesystems..."
+                        jl filesystem list
                         ;;
                     2)
-                        read -p "Enter storage name: " STORAGE_NAME
-                        read -p "Enter size in GB: " STORAGE_SIZE
-                        echo "Creating storage [$STORAGE_NAME] (${STORAGE_SIZE}GB)..."
-                        jl storage create "$STORAGE_NAME" --size "$STORAGE_SIZE"
+                        read -p "Enter filesystem name (max 30 chars): " FS_NAME
+                        read -p "Enter size in GB (50-2048): " FS_SIZE
+                        echo "Creating filesystem [$FS_NAME] (${FS_SIZE}GB) in IN2..."
+                        jl filesystem create --name "$FS_NAME" --storage "$FS_SIZE" --yes
                         ;;
                     3)
-                        if [ -z "$MACHINE_ID" ] || [ "$MACHINE_ID" == "null" ]; then
-                            echo "Error: No active instance. Please create an instance first."
-                        else
-                            read -p "Enter storage name to attach: " STORAGE_NAME
-                            echo "Attaching storage [$STORAGE_NAME] to instance [$MACHINE_ID]..."
-                            jl storage attach "$STORAGE_NAME" "$MACHINE_ID"
-                        fi
+                        read -p "Enter filesystem ID to resize: " FS_ID
+                        read -p "Enter new size in GB (must be larger than current): " FS_SIZE
+                        echo "Resizing filesystem [$FS_ID] to ${FS_SIZE}GB..."
+                        jl filesystem edit "$FS_ID" --storage "$FS_SIZE" --yes
                         ;;
                     4)
-                        if [ -z "$MACHINE_ID" ] || [ "$MACHINE_ID" == "null" ]; then
-                            echo "Error: No active instance."
-                        else
-                            read -p "Enter storage name to detach: " STORAGE_NAME
-                            echo "Detaching storage [$STORAGE_NAME] from instance [$MACHINE_ID]..."
-                            jl storage detach "$STORAGE_NAME" "$MACHINE_ID"
-                        fi
+                        read -p "Enter filesystem ID to remove: " FS_ID
+                        echo "Removing filesystem [$FS_ID]..."
+                        jl filesystem remove "$FS_ID" --yes
                         ;;
                     5)
-                        read -p "Enter storage name to destroy: " STORAGE_NAME
-                        echo "Destroying storage [$STORAGE_NAME]..."
-                        jl storage destroy "$STORAGE_NAME" --yes
-                        ;;
-                    6)
                         break
                         ;;
                     *)
-                        echo "Invalid selection. Please enter a value between 1 and 6."
+                        echo "Invalid selection. Please enter a value between 1 and 5."
                         ;;
                 esac
 
                 echo ""
-                read -p "Press [Enter] to return to the storage menu..."
+                read -p "Press [Enter] to return to the filesystem menu..."
             done
             ;;
         6)
