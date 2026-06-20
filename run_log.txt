@@ -1,0 +1,39 @@
+=========================================
+          Instance Manager REPL          
+=========================================
+1. Create instance
+2. Log into SSH (share port 6006)
+3. Stream logs
+4. Destroy instance
+5. Exit
+=========================================
+Select an option (1-5): 3
+Streaming logs for Run ID: [r_10d1ac3c]...
+(Press Ctrl+C to stop streaming and return to the menu)
+Following logs for run r_10d1ac3c on instance 430661. Press Ctrl+C to stop streaming.
+Showing the latest 20 log lines first. Use --tail N to change this.
+Run ID: r_10d1ac3c
+  Logs    jl run logs r_10d1ac3c --follow
+  Status  jl run status r_10d1ac3c
+  Stop    jl run stop r_10d1ac3c
+  All runs jl run list
+      line 520, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File
+      "/home/.cache/uv/builds-v0/.tmpIfe5Ls/lib/python3.10/site-packages/setuptools/build_meta.py",
+      line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 22, in <module>
+      ModuleNotFoundError: No module named 'torch'
+
+      hint: This error likely indicates that `flash-attn@2.8.3.post1`
+      depends on `torch`, but doesn't declare it as a build dependency.
+      If `flash-attn` is a first-party package, consider adding `torch`
+      to its `build-system.requires`. Otherwise, either add it to your
+      `pyproject.toml` under:
+
+      [tool.uv.extra-build-dependencies]
+      flash-attn = ["torch"]
+
+      or `uv pip install torch` into the environment and re-run with
+      `--no-build-isolation`.
