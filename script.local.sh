@@ -12,6 +12,7 @@ uv pip install tensorboard
 uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
 uv pip install datasets tokenizers transformers pyarrow accelerate
 uv pip install flash-attn-3 --no-deps --index-url https://download.pytorch.org/whl/cu130
+uv pip install "transformer-engine[pytorch]"
 
 # start app:
 .venv/bin/python train.py

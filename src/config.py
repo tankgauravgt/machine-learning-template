@@ -38,7 +38,8 @@ class MLMConfig:
     shuffle_buffer_size: int = 10_000
 
     # Hardware Optimisation Flags (Hopper / H200)
-    use_bf16: bool = True
+    use_bf16: bool = True           # master weights / model init dtype
+    use_fp8: bool = True            # FP8 compute via TransformerEngine (Hopper+); supersedes bf16 in compute
     use_tf32: bool = True
     use_torch_compile: bool = True
     use_flash_attention: bool = True

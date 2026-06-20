@@ -2,7 +2,7 @@ import os
 
 # Must be set before any CUDA / torch import to take effect
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")          # avoid tokeniser fork warnings
-os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "bf16")
+os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "fp8")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")  # reduce fragmentation
 os.environ.setdefault("NCCL_P2P_DISABLE", "0")
 

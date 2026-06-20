@@ -56,7 +56,9 @@ class MLMTrainer:
             dataloader_persistent_workers=self.config.num_workers > 0,
             dataloader_drop_last=True,
             # Hardware Acceleration (H200 / Hopper)
-            bf16=self.config.use_bf16,
+            # FP8 handles compute; bf16 is kept only as master-weight fallback when FP8 is off
+            fp8=self.config.use_fp8,
+            bf16=self.config.use_bf16 and not self.config.use_fp8,
             fp16=False,
             tf32=self.config.use_tf32,
             torch_compile=self.config.use_torch_compile,
