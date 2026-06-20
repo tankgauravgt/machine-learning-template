@@ -10,5 +10,6 @@ torchaudio
 
 transformers>=4.57
 accelerate>=1.8
-datasets
+datasets>=3.0.0
+pyarrow>=14.0.0,<15.0.0
 tokenizers
