@@ -56,8 +56,8 @@ class MLMTrainer:
             dataloader_persistent_workers=self.config.num_workers > 0,
             dataloader_drop_last=True,
             # Hardware Acceleration (H200 / Hopper)
-            # FP8 handles compute; bf16 is kept only as master-weight fallback when FP8 is off
-            fp8=self.config.use_fp8,
+            # FP8 is activated via ACCELERATE_MIXED_PRECISION=fp8 in train.py (set before CUDA init)
+            # bf16 is kept as fallback master-weight dtype when FP8 is off
             bf16=self.config.use_bf16 and not self.config.use_fp8,
             fp16=False,
             tf32=self.config.use_tf32,
