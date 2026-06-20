@@ -25,18 +25,9 @@ while true; do
 
     case $OPTION in
         1)
-            FS_FLAG=""
-            read -p "Attach a filesystem? (y/n): " ATTACH_FS
-            if [[ "$ATTACH_FS" =~ ^[Yy]$ ]]; then
-                echo "Fetching available filesystems..."
-                jl filesystem list
-                read -p "Enter filesystem ID to attach: " FS_ID
-                FS_FLAG="--fs-id $FS_ID"
-            fi
-
             echo "Creating instance..."
-            OUTPUT=$(jl run . --gpu "H200" --region "IN2" --script ./script.local.sh --spot --json --keep --no-follow --yes --setup "export HF_TOKEN=$HF_TOKEN && export ACCELERATE_MIXED_PRECISION=fp16" $FS_FLAG)
-
+            OUTPUT=$(jl run . --gpu "H200" --region "IN2" --script ./script.local.sh --spot --json --keep --no-follow --yes --setup "export HF_TOKEN=$HF_TOKEN && export ACCELERATE_MIXED_PRECISION=fp8")
+            
             # Extract identifiers
             MACHINE_ID=$(echo "$OUTPUT" | jq -r '.machine_id')
             RUN_ID=$(echo "$OUTPUT" | jq -r '.run_id')
@@ -81,54 +72,6 @@ while true; do
             fi
             ;;
         5)
-            while true; do
-                clear
-                echo "========================================="
-                echo "         Filesystem Manager              "
-                echo "========================================="
-                echo "1. List filesystems"
-                echo "2. Create filesystem"
-                echo "3. Edit filesystem (resize)"
-                echo "4. Remove filesystem"
-                echo "5. Back"
-                echo "========================================="
-                read -p "Select an option (1-5): " FS_OPTION
-
-                case $FS_OPTION in
-                    1)
-                        echo "Listing filesystems..."
-                        jl filesystem list
-                        ;;
-                    2)
-                        read -p "Enter filesystem name (max 30 chars): " FS_NAME
-                        read -p "Enter size in GB (50-2048): " FS_SIZE
-                        echo "Creating filesystem [$FS_NAME] (${FS_SIZE}GB) in IN2..."
-                        jl filesystem create --name "$FS_NAME" --storage "$FS_SIZE" --yes
-                        ;;
-                    3)
-                        read -p "Enter filesystem ID to resize: " FS_ID
-                        read -p "Enter new size in GB (must be larger than current): " FS_SIZE
-                        echo "Resizing filesystem [$FS_ID] to ${FS_SIZE}GB..."
-                        jl filesystem edit "$FS_ID" --storage "$FS_SIZE" --yes
-                        ;;
-                    4)
-                        read -p "Enter filesystem ID to remove: " FS_ID
-                        echo "Removing filesystem [$FS_ID]..."
-                        jl filesystem remove "$FS_ID" --yes
-                        ;;
-                    5)
-                        break
-                        ;;
-                    *)
-                        echo "Invalid selection. Please enter a value between 1 and 5."
-                        ;;
-                esac
-
-                echo ""
-                read -p "Press [Enter] to return to the filesystem menu..."
-            done
-            ;;
-        6)
             echo "Exiting the manager."
             # Clear screen upon exiting to leave a clean terminal
             clear
