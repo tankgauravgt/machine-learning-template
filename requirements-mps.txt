@@ -1,6 +1,6 @@
 jarvislabs
 tensorboard
-torch
+torch==2.11.0
 torchvision
 torchaudio
 datasets
