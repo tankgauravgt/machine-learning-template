@@ -3,7 +3,7 @@ tensorboard
 torch==2.11.0
 torchvision
 torchaudio
-datasets
+datasets>=3.0
 tokenizers
 transformers
 pyarrow

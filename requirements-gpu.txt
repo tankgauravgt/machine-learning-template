@@ -5,7 +5,7 @@ tensorboard
 torch
 torchvision
 torchaudio
-datasets
+datasets>=3.0
 tokenizers
 transformers
 pyarrow
