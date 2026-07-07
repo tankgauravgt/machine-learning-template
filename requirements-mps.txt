@@ -1,0 +1,11 @@
+jarvislabs
+tensorboard
+torch
+torchvision
+torchaudio
+datasets
+tokenizers
+transformers
+pyarrow
+accelerate
+wheel
