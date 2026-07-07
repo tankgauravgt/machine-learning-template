@@ -13,4 +13,4 @@ uv pip install -r requirements-cpu.txt
 export HF_HOME="./hf_cache"
 
 # start app:
-HF_TOKEN=***REDACTED_HF_TOKEN*** .venv/bin/python train.py
+.venv/bin/python train.py
