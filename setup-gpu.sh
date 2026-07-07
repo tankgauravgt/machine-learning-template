@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # create environment:
 UV_VENV_CLEAR=1 uv venv --python 3.12
@@ -7,7 +8,7 @@ UV_VENV_CLEAR=1 uv venv --python 3.12
 source .venv/bin/activate
 
 # install standard gpu dependencies:
-uv pip install -r requirements-gpu.txt
+uv pip install -r requirements-gpu.txt --index-strategy unsafe-best-match
 
 # install flash-attn using standard pip as requested:
 python -m ensurepip --default-pip

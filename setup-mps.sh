@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # create environment:
 UV_VENV_CLEAR=1 uv venv --python 3.12
