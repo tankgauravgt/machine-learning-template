@@ -9,5 +9,8 @@ source .venv/bin/activate
 # install cpu dependencies:
 uv pip install -r requirements-cpu.txt
 
+# set huggingface cache location:
+export HF_HOME="./hf_cache"
+
 # start app:
 .venv/bin/python train.py

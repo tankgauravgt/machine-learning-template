@@ -56,36 +56,46 @@ class DataPipeline:
         self.tokenizer.save_pretrained(self.config.tokenizer_dir)
 
         return self.tokenizer
-
+    
     def prepare_dataset(self, dataset: Dataset) -> Tuple[Dataset, DataCollatorForLanguageModeling]:
-        """Tokenises the dataset in parallel, caches the result to disk, and returns it."""
+        """Tokenises the dataset efficiently and returns it."""
         if not self.tokenizer:
             raise ValueError("Tokeniser must be built before preparing the dataset.")
+
+        # 1. Ensure fast tokenizer is active
+        if not getattr(self.tokenizer, "is_fast", False):
+            print("Warning: You are using a slow tokenizer. Multi-threading will be limited.")
 
         def tokenize_fn(batch):
             return self.tokenizer(
                 batch["text"],
                 truncation=True,
                 max_length=self.config.max_length,
-                padding="max_length",
+                padding=False, # 2. CRITICAL: Do NOT pad here. Let the DataCollator do it dynamically!
             )
 
+        # 3. Optimize map parameters
         tokenized_dataset = dataset.map(
             tokenize_fn,
             batched=True,
-            batch_size=1000,
+            batch_size=4000,
             num_proc=self.config.tokenize_num_proc,
-            remove_columns=dataset.column_names,
             desc="Tokenising",
         )
+
+        # 4. Remove columns after mapping, not during
+        columns_to_remove = [col for col in dataset.column_names if col not in ["input_ids", "attention_mask"]]
+        tokenized_dataset = tokenized_dataset.remove_columns(columns_to_remove)
 
         tokenized_dataset = tokenized_dataset.shuffle(seed=42)
         tokenized_dataset.set_format("torch")
 
+        # 5. Dynamic Padding via Collator (saves massive amounts of memory and time)
         collator = DataCollatorForLanguageModeling(
             tokenizer=self.tokenizer,
             mlm=True,
             mlm_probability=self.config.mlm_probability,
+            pad_to_multiple_of=8, # Optimizes Tensor Core execution on H200
         )
 
         return tokenized_dataset, collator

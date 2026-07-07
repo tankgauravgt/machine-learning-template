@@ -13,5 +13,8 @@ uv pip install -r requirements-mps.txt
 python -m ensurepip --default-pip
 python -m pip install mps-flash-attn
 
+# set huggingface cache location:
+export HF_HOME="./hf_cache"
+
 # start app:
 .venv/bin/python train.py

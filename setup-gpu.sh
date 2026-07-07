@@ -26,5 +26,8 @@ uv pip install nvidia-cublas --extra-index-url=https://download.pytorch.org/whl/
 export NVTE_FUSED_ATTN=0
 export NVTE_FLASH_ATTN=1
 
+# set huggingface cache location:
+export HF_HOME="./hf_cache"
+
 # start app:
 .venv/bin/python train.py
