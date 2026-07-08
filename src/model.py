@@ -17,27 +17,13 @@ class ModelFactory:
         # len(tokenizer) already includes added special tokens (e.g. [MASK]).
         vocab_size = len(tokenizer)
 
-        # When TransformerEngine's FP8 autocast is active, accelerate replaces
-        # the embedding LayerNorm with a TE op that expects fp32 master
-        # weights — bf16-initialised parameters trip a "invalid argument"
-        # inside the TE CUDA kernel. Force fp32 init on the FP8 path and let
-        # TE cast on entry; keep bf16 as the master dtype otherwise.
-        if hw.fp8:
-            dtype = torch.float32
-        else:
-            dtype = torch.bfloat16 if hw.bf16 else torch.float32
+        # Initialize natively in bfloat16 if the hardware supports it.
+        # Now that TrainingArguments(bf16=True) is active, the Trainer will run the 
+        # forward pass in a bf16 autocast context, satisfying Transformer Engine 
+        # and Flash Attention 3 without requiring fp32 master weights.
+        dtype = torch.bfloat16 if hw.bf16 else torch.float32
 
         # Attention implementation selection.
-        # We prefer FA-3 strongly on Hopper when it's installed, but the
-        # FA-3 kernel in transformers refuses to run on fp32 parameters and
-        # TE (FP8 path) requires fp32 master weights for its LayerNorm. So:
-        #   * FP8 path (TE manages forward cast): use FA-3 anyway — the FA-3
-        #     forward pass runs under TE's autocast which casts activations
-        #     to bf16/fp8; backward uses bf16 grads via bf16 TrainingArguments.
-        #   * Non-FP8 path on Hopper: use FA-3 only when the model itself is
-        #     bf16 (parameters are bf16, no autocast gymnastics needed).
-        #   * Anywhere else with FA-2: use FA-2 (works on fp32 + autocast).
-        #   * No fast kernel: portable SDPA (CUDA / MPS / CPU).
         if hw.is_hopper and hw.flash_attn and hw.fp8:
             attn_impl = "flash_attention_3"
         elif hw.is_hopper and hw.flash_attn and hw.bf16:
