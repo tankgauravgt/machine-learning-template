@@ -67,8 +67,8 @@ class MLMTrainer:
             dataloader_drop_last=True,
             # Hardware Acceleration (auto-detected per machine)
             # FP8 is activated via ACCELERATE_MIXED_PRECISION=fp8 (set in configure_environment).
-            # bf16 is kept as the master-weight dtype when FP8 is off.
-            bf16=self.hw.bf16 and not self.hw.fp8,
+            # bf16 is kept True alongside FP8 as the high-precision fallback for ops that don't support FP8.
+            bf16=self.hw.bf16,
             fp16=False,
             tf32=self.hw.tf32,
             torch_compile=self.hw.torch_compile,
