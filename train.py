@@ -1,10 +1,7 @@
 import os
 
-# Must be set before any CUDA / torch import to take effect
-os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")          # avoid tokeniser fork warnings
-os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "fp8")
-os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")  # reduce fragmentation
-os.environ.setdefault("NCCL_P2P_DISABLE", "0")
+# Avoid tokeniser fork warnings; safe to set unconditionally before torch import.
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
 import pyarrow as pa
 # PyExtensionType was renamed to ExtensionType in pyarrow 15; restore the old name
@@ -12,20 +9,21 @@ import pyarrow as pa
 if not hasattr(pa, "PyExtensionType"):
     pa.PyExtensionType = pa.ExtensionType
 
-import torch
-
-# Enable TF32 globally before model/data init
-torch.backends.cuda.matmul.allow_tf32 = True
-torch.backends.cudnn.allow_tf32 = True
-
 from src.config import MLMConfig
+from src.hardware import detect_hardware, configure_environment
 from src.data_pipeline import DataPipeline
 from src.model import ModelFactory
 from src.trainer import MLMTrainer
 
 def main():
     config = MLMConfig()
-    
+
+    # Detect the machine and enable only supported accelerations. Must run before
+    # the Trainer/Accelerator is built so FP8 mixed precision is picked up.
+    hw = detect_hardware(config)
+    configure_environment(hw)
+    print(hw.summary())
+
     print("Initialising Data Pipeline...")
     pipeline = DataPipeline(config)
 
@@ -37,17 +35,17 @@ def main():
 
     print("Preparing tokenised dataset and collator...")
     tokenized_dataset, collator = pipeline.prepare_dataset(dataset)
-    
+
     print("Constructing Hugging Face model architecture...")
-    model = ModelFactory.create_masked_lm(config, tokenizer)
-    
+    model = ModelFactory.create_masked_lm(config, tokenizer, hw)
+
     total_params = sum(p.numel() for p in model.parameters())
     print(f"Model parameters : {total_params:,}")
-    
+
     print("Commencing training execution...")
-    trainer = MLMTrainer(config, model, tokenized_dataset, collator)
+    trainer = MLMTrainer(config, model, tokenized_dataset, collator, hw)
     trainer.execute()
-    
+
     print("Training complete. Model and tokeniser successfully persisted.")
 
 if __name__ == "__main__":

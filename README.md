@@ -1,6 +1,6 @@
 # BERT Base MLM
 
-A BERT base Masked Language Model (MLM) trained from scratch on [FineWeb](https://huggingface.co/datasets/HuggingFaceFW/fineweb), using Hugging Face Transformers and optimised for NVIDIA H200 (Hopper) GPUs.
+A BERT base Masked Language Model (MLM) trained from scratch on [FineWeb](https://huggingface.co/datasets/HuggingFaceFW/fineweb), using Hugging Face Transformers. The code auto-detects the available hardware and runs unchanged on CPU, Apple Silicon (MPS), any CUDA GPU, and NVIDIA H200 (Hopper) — enabling the fastest kernels each platform supports.
 
 ## Architecture
 
@@ -17,44 +17,42 @@ A BERT base Masked Language Model (MLM) trained from scratch on [FineWeb](https:
 
 ## Hardware Optimisations
 
-- **FP8 compute** via NVIDIA TransformerEngine + Accelerate (`ACCELERATE_MIXED_PRECISION=fp8`)
-- **BF16 master weights** to prevent gradient underflow
-- **Flash Attention 2** for O(n) memory attention
-- **TF32** enabled globally for matmuls and cuDNN
-- **`torch.compile`** for kernel fusion
-- **Fused AdamW** (`adamw_torch_fused`) kernel
-- **Pinned memory + prefetch** DataLoader (`num_workers=4`, `prefetch_factor=2`)
-- **`group_by_length`** to minimise padding waste per batch
+Optimisations are enabled automatically based on the detected device (`src/hardware.py`). Each `use_*` flag in `src/config.py` defaults to `"auto"`; set it to `True`/`False` to force, and an unsupported forced flag is clamped with a warning rather than crashing.
+
+| Optimisation | Enabled on |
+|---|---|
+| **FP8 compute** (TransformerEngine + Accelerate) | Hopper (H200) with TransformerEngine installed |
+| **BF16 weights** | CUDA GPUs with bf16 support, and MPS |
+| **Flash Attention** (falls back to SDPA) | CUDA with `flash-attn` installed; SDPA everywhere else |
+| **TF32** matmuls / cuDNN | Ampere+ CUDA GPUs |
+| **`torch.compile`** (inductor) | CUDA and CPU (disabled on MPS) |
+| **Fused AdamW** | CUDA (portable `adamw_torch` elsewhere) |
+| **Pinned memory + prefetch** DataLoader | CUDA (single-process loader on MPS/CPU) |
 
 ## Prerequisites
 
 - Python 3.10+
-- NVIDIA H200 GPU (Hopper architecture required for FP8)
-- CUDA 12.1+
+- One of: CPU, Apple Silicon (MPS), or an NVIDIA GPU (CUDA 12.x). FP8 additionally requires Hopper (H200).
 - `uv` package manager (`pip install uv`)
 - A Hugging Face account with `HF_TOKEN` set (FineWeb requires acceptance of terms)
 
+Pick the setup script for your platform: `setup-cpu.sh`, `setup-mps.sh`, or `setup-gpu.sh`.
+
 ## Training
+
+Each setup script creates a `uv` virtual environment, installs the platform's dependencies, and launches `train.py`.
+
+```bash
+export HF_TOKEN=<your_token>
+
+bash setup-cpu.sh   # plain CPU (any OS)
+bash setup-mps.sh   # Apple Silicon (MPS)
+bash setup-gpu.sh   # NVIDIA CUDA GPU (FP8 fast path on H200)
+```
 
 ### Cloud (H200 via JarvisLabs)
 
-```bash
-export HF_TOKEN=<your_token>
-bash script.cloud.sh
-```
-
-Select **option 1** to provision an H200 spot instance and start training. The script handles environment setup, dependency installation, and launches `train.py` automatically.
-
-Use **option 2** to SSH in and monitor progress (TensorBoard forwarded on port 6006), and **option 3** to stream logs directly.
-
-### Local
-
-```bash
-export HF_TOKEN=<your_token>
-bash script.local.sh
-```
-
-This creates a virtual environment with `uv`, installs dependencies, and runs `train.py`.
+`launch.cloud.sh` provisions an H200 spot instance and runs `setup-gpu.sh` on it. Use it to provision, SSH in and monitor progress (TensorBoard on port 6006), or stream logs.
 
 ### Testing mode
 
@@ -112,12 +110,17 @@ The predictor picks the highest-probability token for each `[MASK]` position and
 .
 ├── src/
 │   ├── config.py          # All hyperparameters and flags
+│   ├── hardware.py        # Runtime device detection + acceleration toggles
 │   ├── data_pipeline.py   # Dataset streaming, BPE tokeniser training, collation
 │   ├── model.py           # BERT base model factory
-│   └── trainer.py         # HF Trainer wrapper with H200-optimised TrainingArguments
+│   └── trainer.py         # HF Trainer wrapper with hardware-adaptive TrainingArguments
 ├── train.py               # Entry point — wires pipeline → model → trainer
 ├── inference.py           # Loads checkpoint and predicts masked tokens
-├── requirements.txt       # Python dependencies
-├── script.local.sh        # Local run script (uv venv + train)
-└── script.cloud.sh        # JarvisLabs REPL — provision / SSH / logs / destroy
+├── requirements-cpu.txt   # CPU dependencies
+├── requirements-mps.txt   # Apple Silicon (MPS) dependencies
+├── requirements-gpu.txt   # CUDA GPU dependencies
+├── setup-cpu.sh           # CPU run script (uv venv + train)
+├── setup-mps.sh           # Apple Silicon run script
+├── setup-gpu.sh           # CUDA GPU run script (optional FP8 / flash-attn)
+└── launch.cloud.sh        # JarvisLabs REPL — provision / SSH / logs / destroy
 ```

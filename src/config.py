@@ -1,5 +1,9 @@
 """Configuration parameters for model architecture and training."""
 from dataclasses import dataclass
+from typing import Union
+
+# Tri-state flag: "auto" lets hardware detection decide; True/False force it.
+Flag = Union[bool, str]
 
 @dataclass
 class MLMConfig:
@@ -37,13 +41,15 @@ class MLMConfig:
     num_workers: int = 4
     tokenize_num_proc: int = 4
 
-    # Hardware Optimisation Flags (Hopper / H200)
-    use_bf16: bool = True           # master weights / model init dtype
-    use_fp8: bool = True            # FP8 compute via TransformerEngine (Hopper+); supersedes bf16 in compute
-    use_tf32: bool = True
-    use_torch_compile: bool = True
-    use_flash_attention: bool = True
+    # Hardware Optimisation Flags — "auto" enables each only where supported.
+    # Set to True/False to force; an unsupported forced flag is clamped with a warning.
+    use_bf16: Flag = "auto"           # bfloat16 model init / master weights
+    use_fp8: Flag = "auto"            # FP8 compute via TransformerEngine (Hopper+)
+    use_tf32: Flag = "auto"           # TF32 matmuls (Ampere+)
+    use_torch_compile: Flag = "auto"  # torch.compile / inductor
+    use_flash_attention: Flag = "auto"  # Flash-Attention kernels (CUDA)
 
     # Directories
     checkpoint_dir: str = "checkpoints"
     tokenizer_dir: str = "tokenizer_output"
+    cache_dir: str = "cache"        # tokenised-dataset cache (keyed by config fingerprint)

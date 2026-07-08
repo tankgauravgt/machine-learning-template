@@ -2,18 +2,21 @@ import torch
 from transformers import AutoModelForMaskedLM, PreTrainedTokenizerFast
 
 from src.config import MLMConfig
+from src.hardware import detect_hardware
 
 class MaskedLanguagePredictor:
     """Handles inference tasks for a trained Masked Language Model."""
-    
+
     def __init__(self, config: MLMConfig):
-        self.device = torch.device("cuda" if torch.cuda.is_available() 
-                                   else "mps" if torch.backends.mps.is_available() 
-                                   else "cpu")
-        
-        print("Loading tokeniser and model weights...")
+        hw = detect_hardware(config)
+        self.device = torch.device(hw.device)
+        dtype = torch.bfloat16 if hw.bf16 else torch.float32
+
+        print(f"Loading tokeniser and model weights on {hw.device}...")
         self.tokenizer = PreTrainedTokenizerFast.from_pretrained(config.tokenizer_dir)
-        self.model = AutoModelForMaskedLM.from_pretrained(config.checkpoint_dir).to(self.device)
+        self.model = AutoModelForMaskedLM.from_pretrained(
+            config.checkpoint_dir, torch_dtype=dtype
+        ).to(self.device)
         self.model.eval()
 
     def predict(self, sentence: str) -> None:

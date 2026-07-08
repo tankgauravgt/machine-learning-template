@@ -2,12 +2,12 @@
 
 jarvislabs
 tensorboard
-torch
+torch>=2.5
 torchvision
 torchaudio
 datasets>=3.0
-tokenizers
-transformers
-pyarrow
-accelerate
+tokenizers>=0.20
+transformers>=4.46
+pyarrow>=17
+accelerate>=1.0
 wheel
