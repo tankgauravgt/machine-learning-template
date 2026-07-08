@@ -38,8 +38,8 @@ class MLMConfig:
     lr_scheduler_type: str = "cosine"
 
     # DataLoader
-    num_workers: int = 4
-    tokenize_num_proc: int = 4
+    num_workers: int = 16
+    tokenize_num_proc: int = 16
 
     # Hardware Optimisation Flags — "auto" enables each only where supported.
     # Set to True/False to force; an unsupported forced flag is clamped with a warning.
