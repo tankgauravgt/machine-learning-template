@@ -21,7 +21,7 @@ class ModelFactory:
 
         # flash_attention_2 when kernels are present, else the portable SDPA path
         # (works on CUDA, MPS, and CPU).
-        attn_impl = "flash_attention_2" if hw.flash_attn else "sdpa"
+        attn_impl = "flash_attention_3" if hw.is_hopper and hw.flash_attn else ("flash_attention_2" if hw.flash_attn else "sdpa")
 
         bert_config = BertConfig(
             vocab_size=vocab_size,

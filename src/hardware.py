@@ -82,11 +82,14 @@ def detect_hardware(config: MLMConfig) -> HardwareInfo:
         _has_package("flash_attn") or _has_package("flash_attn_3")
     )
     cap_tf32 = ampere_plus
-    cap_compile = device in ("cuda", "cpu")  # inductor is unstable on MPS
+    # torch.compile does not compose with TransformerEngine: Dynamo cannot
+    # trace TE's pybind LayerNorm/linear ops and falls into a broken fused path
+    # that errors inside the TE CUDA kernel. On CUDA, only compile when FP8 is off.
+    cap_compile = device == "cpu" or (device == "cuda" and not cap_fp8)
     cap_pin = device == "cuda"
     cap_fused = device == "cuda"
 
-    return HardwareInfo(
+    hw = HardwareInfo(
         device=device,
         is_hopper=is_hopper,
         bf16=_resolve(config.use_bf16, cap_bf16, "bf16"),
@@ -97,6 +100,16 @@ def detect_hardware(config: MLMConfig) -> HardwareInfo:
         pin_memory=cap_pin,
         fused_optim=cap_fused,
     )
+
+    if hw.fp8 and hw.torch_compile:
+        # Defence-in-depth: cap_compile already forbids this, but never combine.
+        hw.torch_compile = False
+    elif hw.fp8 and (
+        config.use_torch_compile is True or config.use_torch_compile == "auto"
+    ):
+        print("Warning: torch.compile disabled — it does not compose with FP8/TransformerEngine "
+              "(Dynamo cannot trace TE's pybind kernels).")
+    return hw
 
 
 def configure_environment(hw: HardwareInfo) -> None:
