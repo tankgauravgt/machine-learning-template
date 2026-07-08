@@ -17,7 +17,15 @@ class ModelFactory:
         # len(tokenizer) already includes added special tokens (e.g. [MASK]).
         vocab_size = len(tokenizer)
 
-        dtype = torch.bfloat16 if hw.bf16 else torch.float32
+        # When TransformerEngine's FP8 autocast is active, accelerate replaces
+        # the embedding LayerNorm with a TE op that expects fp32 master
+        # weights — bf16-initialised parameters trip a "invalid argument"
+        # inside the TE CUDA kernel. Force fp32 init on the FP8 path and let
+        # TE cast on entry; keep bf16 as the master dtype otherwise.
+        if hw.fp8:
+            dtype = torch.float32
+        else:
+            dtype = torch.bfloat16 if hw.bf16 else torch.float32
 
         # flash_attention_2 when kernels are present, else the portable SDPA path
         # (works on CUDA, MPS, and CPU).
