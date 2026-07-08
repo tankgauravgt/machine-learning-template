@@ -142,6 +142,9 @@ class DataPipeline:
             batched=True,
             batch_size=4000,
             num_proc=self.config.tokenize_num_proc,
+            # Prefetch is per-worker: each of the `num_proc` workers keeps
+            # `prefetch_factor` batches in flight, overlapping I/O + tokenisation.
+            prefetch_factor=self.config.prefetch_factor,
             desc="Tokenising",
         )
 

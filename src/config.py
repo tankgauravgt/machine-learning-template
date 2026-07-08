@@ -40,6 +40,7 @@ class MLMConfig:
     # DataLoader
     num_workers: int = 16
     tokenize_num_proc: int = 16
+    prefetch_factor: int = 4        # batches each worker pre-stages in the background
 
     # Hardware Optimisation Flags — "auto" enables each only where supported.
     # Set to True/False to force; an unsupported forced flag is clamped with a warning.

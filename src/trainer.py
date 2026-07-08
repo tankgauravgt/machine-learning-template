@@ -45,7 +45,7 @@ class MLMTrainer:
 
         dataloader_kwargs = {}
         if workers > 0:
-            dataloader_kwargs["dataloader_prefetch_factor"] = 8
+            dataloader_kwargs["dataloader_prefetch_factor"] = self.config.prefetch_factor
             dataloader_kwargs["dataloader_persistent_workers"] = True
 
         training_args = TrainingArguments(
