@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 trap '' INT
 stty -echoctl 2>/dev/null
