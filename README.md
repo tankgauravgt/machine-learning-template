@@ -124,3 +124,16 @@ The predictor picks the highest-probability token for each `[MASK]` position and
 ├── setup-gpu.sh           # CUDA GPU run script (optional FP8 / flash-attn)
 └── launch.cloud.sh        # JarvisLabs REPL — provision / SSH / logs / destroy
 ```
+
+---
+
+## Target hardware capabilities
+
+|Compute|Arch|FA|FP64|FP32|TF32|BF16|FP16|FP8|FP6|FP4|INT64|INT32|INT16|INT8|INT4|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|sm_75|Turing|1.x|✅|✅|❌|❌|✅|❌|❌|❌|✅|✅|✅|✅|✅|
+|sm_80|Ampere|2.x|✅|✅|✅|✅|✅|❌|❌|❌|✅|✅|✅|✅|✅|
+|sm_86|Ampere|2.x|✅|✅|✅|✅|✅|✅|❌|❌|✅|✅|✅|✅|✅|
+|sm_89|Ampere|2.x|✅|✅|✅|✅|✅|✅|❌|❌|✅|✅|✅|✅|✅|
+|sm_90|Hopper|3.x|✅|✅|✅|✅|✅|✅|❌|❌|✅|✅|✅|✅|❌|
+|sm_100|Blackwell|4.x|✅|✅|✅|✅|✅|✅|✅|✅|✅|✅|✅|✅|❌|
