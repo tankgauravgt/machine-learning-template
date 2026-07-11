@@ -1,4 +1,7 @@
 """Configuration parameters for model architecture and training."""
+
+import os
+
 from dataclasses import dataclass
 from typing import Union
 
@@ -38,8 +41,8 @@ class MLMConfig:
     lr_scheduler_type: str = "cosine"
 
     # DataLoader
-    num_workers: int = 16
-    tokenize_num_proc: int = 16
+    num_workers: int = os.cpu_count() // 2
+    tokenize_num_proc: int = os.cpu_count() // 2
 
     # Hardware Optimisation Flags — "auto" enables each only where supported.
     # Set to True/False to force; an unsupported forced flag is clamped with a warning.
