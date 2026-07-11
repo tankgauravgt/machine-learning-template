@@ -46,20 +46,12 @@ class HardwareManager:
 
     @property
     def attn_impl(self) -> str:
-        if self.device == "cuda":
-            sm_major = self.cuda_capabilities[0]
-            # -------------------------
-            # FA3: Hopper+ (sm_90+)
-            # -------------------------            
-            if sm_major >= 9 and self.__has_package("flash_attn_3"):
-                return "flash_attention_3"
-            # -------------------------
-            # FA2: Ampere+ (sm_80+)
-            # -------------------------
-            if sm_major >= 8 and self.__has_package("flash_attn"):
-                return "flash_attention_2"
-            # -------------------------
-        return "sdpa"
+        if self.device != "cuda":
+            return "sdpa"
+        elif self.cuda_capabilities >= (9, 0) and self.__has_package("flash_attn_3"):
+            return "flash_attention_3"
+        elif self.cuda_capabilities >= (8, 0) and self.__has_package("flash_attn"):
+            return "flash_attention_2"
 
 
     # =====================================================
@@ -68,15 +60,9 @@ class HardwareManager:
 
     @property
     def transformer_engine_support(self) -> bool:
-        if self.device == "cuda":
-            sm_major = self.cuda_capabilities[0]
-            # -------------------------
-            # TE: Ampere+ (sm_80+)
-            # -------------------------
-            return sm_major >= 8 and self.__has_package("transformer_engine")
-            # -------------------------
-        return False
-
+        if self.device != "cuda":
+            return False
+        return self.cuda_capabilities >= (8, 0) and self.__has_package("transformer_engine")
 
     # =====================================================
     # DATA TYPES SUPPORT
@@ -84,38 +70,16 @@ class HardwareManager:
 
     @property
     def fp8_support(self) -> bool:
-        if self.device == "cuda":
-            sm_major = self.cuda_capabilities[0]
-            # -------------------------
-            # FP8: Hopper+ (sm_90+)
-            # -------------------------
-            return sm_major >= 9
-        return False
+        return False if self.device != "cuda" else self.cuda_capabilities >= (8, 9)
     
     @property
     def bf16_support(self) -> bool:
-        if self.device == "cuda":
-            sm_major = self.cuda_capabilities[0]
-            # -------------------------
-            # BF16: Ampere+ (sm_80+)
-            # -------------------------
-            return sm_major >= 8
-        return False
+        return False if self.device != "cuda" else self.cuda_capabilities >= (8, 0)
     
     @property
     def fp16_support(self) -> bool:
-        if self.device == "cuda":
-            sm_major = self.cuda_capabilities[0]
-            # -------------------------
-            # FP16: Maxwell+ (sm_50+)
-            # -------------------------
-            return sm_major >= 5
-        return False
+        return False if self.device != "cuda" else self.cuda_capabilities >= (5, 0)
     
     @property
     def fp32_support(self) -> bool:
-        # -------------------------
-        # FP32: All devices
-        # -------------------------
         return True
-    
