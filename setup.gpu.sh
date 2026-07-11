@@ -36,7 +36,7 @@ export FLASH_ATTN_CUDA_ARCHS="$CAP_INT"
 # 3. Conditionally install based on the hardware capability
 if [ "$CAP_INT" -ge 90 ]; then
     echo "Hopper architecture detected. Installing FlashAttention-3..."
-    UV_TORCH_BACKEND=auto uv pip install flash_attn_3 --no-build-isolation
+    UV_TORCH_BACKEND=auto uv pip install flash_attn_3 --find-links https://windreamer.github.io/flash-attention3-wheels/cu130_torch2120
 
 elif [ "$CAP_INT" -ge 80 ]; then
     echo "Ampere/Ada architecture detected. Installing FlashAttention-2..."
@@ -58,7 +58,7 @@ fi
 # =========================================================
 
 # install transformer-engine:
-UV_TORCH_BACKEND=auto uv pip install flash_attn_3 --find-links https://windreamer.github.io/flash-attention3-wheels/cu130_torch2120
+UV_TORCH_BACKEND=auto uv pip install "transformer-engine[pytorch]" --no-build-isolation
 
 # set huggingface cache location:
 export HF_HOME="./hf_cache"
