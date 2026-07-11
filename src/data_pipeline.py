@@ -149,7 +149,6 @@ class DataPipeline:
             num_proc=self.config.tokenize_num_proc,
             # Remove columns DURING the map step to avoid massive unnecessary disk writes
             remove_columns=columns_to_remove, 
-            prefetch_factor=getattr(self.config, 'prefetch_factor', 2),
             desc="Tokenising",
         )
 
