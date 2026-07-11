@@ -45,6 +45,7 @@ elif [ "$CAP_INT" -ge 80 ]; then
     FA2_URL="$FA_BASE/$FA2_WHEEL"
     wget -q --show-progress $FA2_URL
     UV_TORCH_BACKEND=auto uv pip install $FA2_WHEEL
+    rm -rf $FA2_WHEEL*
 
 else
     echo "Warning: Compute capability $COMPUTE_CAP is below 8.0."
