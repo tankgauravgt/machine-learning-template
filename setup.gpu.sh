@@ -36,7 +36,12 @@ export FLASH_ATTN_CUDA_ARCHS="$CAP_INT"
 # 3. Conditionally install based on the hardware capability
 if [ "$CAP_INT" -ge 90 ]; then
     echo "Hopper architecture detected. Installing FlashAttention-3..."
-    UV_TORCH_BACKEND=auto uv pip install flash_attn_3 --find-links https://windreamer.github.io/flash-attention3-wheels/cu130_torch2120
+    FA_BASE="https://000010000000100100000000.blob.core.windows.net/semantictank-wheels"
+    FA3_WHEEL="flash_attn_3-3.0.0+20260519.cu130torch2120cxx11abitrue.8a8b2f-cp39-abi3-linux_x86_64.whl"
+    FA3_URL="$FA_BASE/$FA3_WHEEL"
+    wget -q --show-progress $FA3_URL
+    UV_TORCH_BACKEND=auto uv pip install $FA3_WHEEL
+    rm -rf $FA3_WHEEL*
 
 elif [ "$CAP_INT" -ge 80 ]; then
     echo "Ampere/Ada architecture detected. Installing FlashAttention-2..."
