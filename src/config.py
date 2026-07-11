@@ -41,8 +41,8 @@ class MLMConfig:
     lr_scheduler_type: str = "cosine"
 
     # DataLoader
-    num_workers: int = os.cpu_count() // 2
-    tokenize_num_proc: int = os.cpu_count() // 2
+    num_workers: int = os.process_cpu_count()
+    tokenize_num_proc: int = os.process_cpu_count()
 
     # Hardware Optimisation Flags — "auto" enables each only where supported.
     # Set to True/False to force; an unsupported forced flag is clamped with a warning.
