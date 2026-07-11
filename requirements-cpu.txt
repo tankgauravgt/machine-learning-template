@@ -13,3 +13,7 @@ accelerate>=1.14
 requests>=2.32
 ninja
 wheel
+
+# huggingface
+huggingface_hub
+hf_transfer

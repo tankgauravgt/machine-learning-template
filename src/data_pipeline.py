@@ -1,4 +1,7 @@
 import os
+# Enable Rust-based hf_transfer globally for this script to maximize download bandwidth
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
+
 import json
 import hashlib
 import itertools
@@ -42,6 +45,8 @@ class DataPipeline:
             name=self.config.dataset_name,
             split="train",
             streaming=False,
+            # Parallelize the Arrow conversion/preparation phase
+            num_proc=self.config.tokenize_num_proc, 
         )
 
     def _tokenizer_fingerprint(self) -> str:
@@ -136,20 +141,20 @@ class DataPipeline:
                 max_length=self.config.max_length,
                 padding=False,  # Do NOT pad here — the DataCollator pads dynamically per batch.
             )
+            
+        columns_to_remove = [c for c in dataset.column_names if c not in ["input_ids", "attention_mask"]]
 
         tokenized_dataset = dataset.map(
             tokenize_fn,
             batched=True,
             batch_size=4000,
             num_proc=self.config.tokenize_num_proc,
-            # Prefetch is per-worker: each of the `num_proc` workers keeps
-            # `prefetch_factor` batches in flight, overlapping I/O + tokenisation.
-            prefetch_factor=self.config.prefetch_factor,
+            # Remove columns DURING the map step to avoid massive unnecessary disk writes
+            remove_columns=columns_to_remove, 
+            prefetch_factor=getattr(self.config, 'prefetch_factor', 2),
             desc="Tokenising",
         )
 
-        columns_to_remove = [c for c in dataset.column_names if c not in ["input_ids", "attention_mask"]]
-        tokenized_dataset = tokenized_dataset.remove_columns(columns_to_remove)
         tokenized_dataset = tokenized_dataset.shuffle(seed=42)
 
         # Persist the fully processed dataset so re-runs load instantly.

@@ -61,3 +61,6 @@ UV_TORCH_BACKEND=auto uv pip install "transformer-engine[pytorch]" --no-build-is
 
 # set huggingface cache location:
 export HF_HOME="./hf_cache"
+
+# speedup download speed:
+export HF_HUB_ENABLE_HF_TRANSFER="1"
