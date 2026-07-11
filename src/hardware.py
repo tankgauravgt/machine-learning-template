@@ -5,6 +5,8 @@ Hardware capabilities and device management.
 import torch
 import importlib.util
 
+from functools import cached_property
+
 class HardwareManager:
     """
     Detects hardware capabilities and selects the best 
@@ -23,7 +25,7 @@ class HardwareManager:
     # DEVICE DETECTION
     # =====================================================
 
-    @property
+    @cached_property
     def device(self) -> str:
         return "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -32,7 +34,7 @@ class HardwareManager:
     # CUDA CAPABILITY DETECTION
     # =====================================================
 
-    @property
+    @cached_property
     def cuda_capabilities(self) -> tuple:
         if self.device == "cuda":
             return torch.cuda.get_device_capability()
@@ -44,7 +46,7 @@ class HardwareManager:
     # ATTENTION IMPLEMENTATION SELECTION
     # =====================================================
 
-    @property
+    @cached_property
     def attn_impl(self) -> str:
         if self.device != "cuda":
             return "sdpa"
@@ -52,13 +54,15 @@ class HardwareManager:
             return "flash_attention_3"
         elif self.cuda_capabilities >= (8, 0) and self.__has_package("flash_attn"):
             return "flash_attention_2"
+        else:
+            return "sdpa"
 
 
     # =====================================================
     # TRANSFORMER ENGINE DETECTION
     # =====================================================
 
-    @property
+    @cached_property
     def transformer_engine_support(self) -> bool:
         if self.device != "cuda":
             return False
@@ -68,18 +72,18 @@ class HardwareManager:
     # DATA TYPES SUPPORT
     # =====================================================
 
-    @property
+    @cached_property
     def fp8_support(self) -> bool:
         return False if self.device != "cuda" else self.cuda_capabilities >= (8, 9)
     
-    @property
+    @cached_property
     def bf16_support(self) -> bool:
         return False if self.device != "cuda" else self.cuda_capabilities >= (8, 0)
     
-    @property
+    @cached_property
     def fp16_support(self) -> bool:
         return False if self.device != "cuda" else self.cuda_capabilities >= (5, 0)
     
-    @property
+    @cached_property
     def fp32_support(self) -> bool:
         return True
