@@ -16,7 +16,6 @@ wheel
 
 # huggingface
 huggingface_hub
-hf_transfer
 
 # install cuda
 cuda-toolkit[all]
