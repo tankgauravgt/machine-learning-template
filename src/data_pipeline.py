@@ -142,12 +142,15 @@ class DataPipeline:
             
         columns_to_remove = [c for c in dataset.column_names if c not in ["input_ids", "attention_mask"]]
 
+        # Prevent thread contention between Rust tokenizers and Python multiprocessing
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
         tokenized_dataset = dataset.map(
             tokenize_fn,
             batched=True,
-            batch_size=4000,
+            batch_size=20000,
+            writer_batch_size=20000,
             num_proc=self.config.tokenize_num_proc,
-            # Remove columns DURING the map step to avoid massive unnecessary disk writes
             remove_columns=columns_to_remove, 
             desc="Tokenising",
         )
