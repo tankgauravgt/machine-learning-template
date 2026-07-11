@@ -58,7 +58,7 @@ fi
 # =========================================================
 
 # install transformer-engine:
-UV_TORCH_BACKEND=auto uv pip install "transformer-engine[pytorch]" --no-build-isolation --force-reinstall
+UV_TORCH_BACKEND=auto uv pip install flash_attn_3 --find-links https://windreamer.github.io/flash-attention3-wheels/cu130_torch2120
 
 # set huggingface cache location:
 export HF_HOME="./hf_cache"
