@@ -58,7 +58,7 @@ fi
 # =========================================================
 
 # install transformer-engine:
-UV_TORCH_BACKEND=auto uv pip install "transformer-engine[pytorch]" --no-build-isolation
+UV_TORCH_BACKEND=auto uv pip install "transformer-engine[pytorch]" --no-build-isolation --force-reinstall
 
 # set huggingface cache location:
 export HF_HOME="./hf_cache"
