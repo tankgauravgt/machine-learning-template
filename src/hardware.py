@@ -17,6 +17,9 @@ class HardwareManager:
     # =====================================================
 
     def __has_package(self, name: str) -> bool:
+        """
+        Checks if provided package is available or not. 
+        """
         return importlib.util.find_spec(name) is not None
 
     # =====================================================
@@ -24,13 +27,16 @@ class HardwareManager:
     # =====================================================
 
     def __repr__(self):
+        """
+        Object representation string.
+        """
         rstr = ["DEVICE INFO:"]
         rstr.append(f"- Device: {self.device}")
         
         if self.device == "cuda" and not self.is_amd_rocm:
             rstr.append(f"- Compute Capability: {self.compute_capability}")
         elif self.is_amd_rocm:
-            rstr.append("- Architecture: AMD ROCm")
+            rstr.append(f"- Architecture: AMD ROCm (gfx{self.compute_capability[0]}{self.compute_capability[1]}x)")
             
         rstr.append("\nSUPPORTED DATA TYPES:")
         for t in ["fp32", "fp16", "bf16", "fp8"]:
@@ -60,7 +66,9 @@ class HardwareManager:
 
     @cached_property
     def is_amd_rocm(self) -> bool:
-        """PyTorch lumps ROCm under 'cuda'. This explicitly isolates AMD GPUs."""
+        """
+        PyTorch lumps ROCm under 'cuda'. This explicitly isolates AMD GPUs.
+        """
         return self.device == "cuda" and getattr(torch.version, "hip", None) is not None
 
     # =====================================================
@@ -69,8 +77,9 @@ class HardwareManager:
 
     @cached_property
     def compute_capability(self) -> tuple:
-        # Prevents ROCm architecture versions (e.g., gfx942) from being misread as NVIDIA Hopper (9.x)
-        if self.device == "cuda" and not self.is_amd_rocm:
+        # Now safely returns capability for both NVIDIA and AMD
+        # Note: On AMD, this returns the ROCm architecture (e.g., (9, 4) for MI300)
+        if self.device == "cuda":
             return torch.cuda.get_device_capability()
         return (0, 0)
 
@@ -122,15 +131,18 @@ class HardwareManager:
         elif self.device == "xpu":
             return hasattr(torch.xpu, "is_bf16_supported") and torch.xpu.is_bf16_supported()
         elif self.device == "mps":
-            return hasattr(torch.mps, "is_bf16_supported") and getattr(torch.mps, "is_bf16_supported")()
+            return True
         elif self.device == "cpu":
-            # CPUs have native BF16 support in modern PyTorch versions
             return True 
         return False
 
     @cached_property
     def fp8_support(self) -> bool:
-        # Restricts true hardware FP8 to NVIDIA Ada Lovelace/Hopper and newer
-        if self.device == "cuda" and not self.is_amd_rocm:
-            return self.compute_capability >= (8, 9)
+        if self.device == "cuda":
+            if self.is_amd_rocm:
+                # AMD MI300 (gfx940/gfx942) architectures and newer
+                return self.compute_capability >= (9, 4)
+            else:
+                # NVIDIA Ada Lovelace (8, 9), Hopper (9, 0), and newer
+                return self.compute_capability >= (8, 9)
         return False
