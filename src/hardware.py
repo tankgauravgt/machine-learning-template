@@ -3,8 +3,10 @@ Hardware capabilities and device management.
 """
 
 import importlib.util
+import functools
 import torch
-from functools import cached_property
+import os
+
 
 class HardwareManager:
     """
@@ -36,7 +38,9 @@ class HardwareManager:
         if self.device == "cuda" and not self.is_amd_rocm:
             rstr.append(f"- Compute Capability: {self.compute_capability}")
         elif self.is_amd_rocm:
-            rstr.append(f"- Architecture: AMD ROCm (gfx{self.compute_capability[0]}{self.compute_capability[1]}x)")
+            major = self.compute_capability[0]
+            minor = self.compute_capability[1]
+            rstr.append(f"- Architecture: AMD ROCm (gfx{major}{minor}x)")
             
         rstr.append("\nSUPPORTED DATA TYPES:")
         for t in ["fp32", "fp16", "bf16", "fp8"]:
@@ -54,7 +58,7 @@ class HardwareManager:
     # DEVICE DETECTION
     # =====================================================
 
-    @cached_property
+    @functools.cached_property
     def device(self) -> str:
         if torch.cuda.is_available():
             return "cuda"
@@ -64,21 +68,25 @@ class HardwareManager:
             return "xpu"
         return "cpu"
 
-    @cached_property
+    @functools.cached_property
     def is_amd_rocm(self) -> bool:
-        """
-        PyTorch lumps ROCm under 'cuda'. This explicitly isolates AMD GPUs.
-        """
         return self.device == "cuda" and getattr(torch.version, "hip", None) is not None
 
+
+    # =====================================================
+    # NO OF CPUs AVAILABLE:
+    # =====================================================
+
+    @functools.cached_property
+    def n_cpus(self):
+        return os.process_cpu_count()
+    
     # =====================================================
     # CUDA CAPABILITY DETECTION
     # =====================================================
 
-    @cached_property
+    @functools.cached_property
     def compute_capability(self) -> tuple:
-        # Now safely returns capability for both NVIDIA and AMD
-        # Note: On AMD, this returns the ROCm architecture (e.g., (9, 4) for MI300)
         if self.device == "cuda":
             return torch.cuda.get_device_capability()
         return (0, 0)
@@ -87,10 +95,8 @@ class HardwareManager:
     # ATTENTION IMPLEMENTATION SELECTION
     # =====================================================
 
-    @cached_property
+    @functools.cached_property
     def attn_impl(self) -> str:
-        # Note: PyTorch native SDPA automatically routes to FlashAttention-2 
-        # on Ampere+ hardware. External packages are only needed for strict overrides.
         if self.device != "cuda" or self.is_amd_rocm:
             return "sdpa"
             
@@ -105,7 +111,7 @@ class HardwareManager:
     # TRANSFORMER ENGINE DETECTION
     # =====================================================
 
-    @cached_property
+    @functools.cached_property
     def transformer_engine_support(self) -> bool:
         if self.device != "cuda" or self.is_amd_rocm:
             return False
@@ -115,19 +121,18 @@ class HardwareManager:
     # DATA TYPES SUPPORT
     # =====================================================
 
-    @cached_property
+    @functools.cached_property
     def fp32_support(self) -> bool:
         return True
         
-    @cached_property
+    @functools.cached_property
     def fp16_support(self) -> bool:
-        # All modern devices (including CPUs and MPS) support fp16 allocation and compute natively or via emulation.
         return True
 
-    @cached_property
+    @functools.cached_property
     def bf16_support(self) -> bool:
         if self.device == "cuda":
-            return torch.cuda.is_bf16_supported()
+            return hasattr(torch.cuda, "is_bf16_supported") and torch.cuda.is_bf16_supported()
         elif self.device == "xpu":
             return hasattr(torch.xpu, "is_bf16_supported") and torch.xpu.is_bf16_supported()
         elif self.device == "mps":
@@ -136,13 +141,11 @@ class HardwareManager:
             return True 
         return False
 
-    @cached_property
+    @functools.cached_property
     def fp8_support(self) -> bool:
         if self.device == "cuda":
             if self.is_amd_rocm:
-                # AMD MI300 (gfx940/gfx942) architectures and newer
                 return self.compute_capability >= (9, 4)
             else:
-                # NVIDIA Ada Lovelace (8, 9), Hopper (9, 0), and newer
                 return self.compute_capability >= (8, 9)
         return False
